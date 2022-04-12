@@ -1,25 +1,44 @@
-import React from "react";
-import Chatbot from "react-chatbot-kit";
-import 'react-chatbot-kit/build/main.css'
-import './App.css';
-import config from './config';
-import MessageParser from './MessageParser';
-import ActionProvider from './ActionProvider';
+//  Import dependencies
+import React, { useEffect } from "react";
+import "./App.css";
 
+// Import redux components
+import { Provider } from "react-redux";
+import store from "./store";
 
-function App() {
-  return (
-    <div className="App">
-     Hello
-    <div>
-      <Chatbot
-        config={config}
-        messageParser={MessageParser}
-        actionProvider={ActionProvider}
-      />
-    </div>
-    </div>
-  );
+// Import chat component
+import Chat from "./components/chat/Chat";
+
+// Import action
+import { createSession } from "./actions/useAPICall";
+
+// Import axios
+import axios from "axios";
+
+if (localStorage.session) {
+  delete axios.defaults.headers.common["session_id"];
+  axios.defaults.headers.common["session_id"] = localStorage.session;
+} else {
+  delete axios.defaults.headers.common["session_id"];
 }
+
+// Connect application to redux
+const App = () => {
+  useEffect(() => {
+    // Check if there session
+    if (!localStorage.session) {
+      // Create
+      // store.dispatch(createSession());
+    }
+  });
+  return (
+    <Provider store={store}>
+      <div className="container">
+        {/* Insert Chat Component HERE! */}
+        <Chat />
+      </div>
+    </Provider>
+  );
+};
 
 export default App;
