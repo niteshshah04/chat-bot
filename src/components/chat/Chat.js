@@ -96,6 +96,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
                               <div align="right" className={msg.type}>
                                 <Avatar src="/broken-image.jpg"></Avatar>
                                 {msg.message}
+                                <h6>{new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}</h6>
                               </div>
                             ) : (
                               <div align="left" className={msg.type}>
@@ -103,6 +104,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
                                   <AndroidIcon />
                                 </Avatar>
                                 {msg.message}
+                                <h6>{new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}</h6>
                               </div>
                             )
                           )}
