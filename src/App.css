@@ -130,3 +130,8 @@ h1{
   line-height: 0.534 !important;
   letter-spacing: 0em;
 }
+
+.timeStyle {
+  font-size: 0.50em;
+  margin-block-start: 0.53em;
+}
