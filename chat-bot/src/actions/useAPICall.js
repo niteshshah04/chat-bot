@@ -34,9 +34,18 @@ export const createSession = () => async (dispatch) => {
 //  Sends the message to the bot - API CALL
 export const sendMessage = (message) => async (dispatch) => {
   try {
-    // const body = { input: message };
-    // const res = await axios.post("/api", body);
-    const res = 'Hello! How can I help you?'
+    const body = {
+    "message": message
+}; 
+const config = {
+  headers:{
+   'Access-Control-Allow-Origin': 'http://localhost:3000',
+    "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT"
+  }
+};
+    const response = await axios.post("https://afq2nfdfdj.us-east-1.awsapprunner.com/webhooks/rest/webhook", body,  config);
+    const res = response.data[0].text;
+    
     dispatch({
       type: MESSAGE_SUCCESS,
       payload: res,
