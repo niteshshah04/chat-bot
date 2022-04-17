@@ -71,7 +71,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
 
       <div>
         <Dialog open={open} onClose={handleClose}>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", backgroundColor: '#007dba' }}>
             <DialogTitle className="chatBG" id="alert-dialog-slide-title">
             <Typography variant="h5">
               ChatBot
