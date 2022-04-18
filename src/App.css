@@ -135,3 +135,57 @@ h1{
   font-size: 0.50em;
   margin-block-start: 0.53em;
 }
+
+.sendButton {
+  height: 100% !important;
+  background-color: #007dba !important;;
+}
+
+.dot0 {
+  background-color: #007dba;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  margin: 0 3px;
+  animation: BounceAnimation 0.5s linear infinite;
+  animation-delay: 0;
+}
+
+.dot1 {
+  background-color: #007dba;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  margin: 0 3px;
+  animation: BounceAnimation 0.5s linear infinite;
+  animation-delay: 0.1s;
+}
+
+.dot2 {
+  background-color: #007dba;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  margin: 0 3px;
+  animation: BounceAnimation 0.5s linear infinite;
+  animation-delay: 0.2s;
+}
+
+.dotwrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: left;
+}
+
+
+@keyframes BounceAnimation {
+  0% {
+    margin-bottom: 0;
+  }
+  50% {
+    margin-bottom: 3px;
+  }
+  100% {
+    margin-bottom: 0;
+  }
+}

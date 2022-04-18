@@ -10,14 +10,15 @@ import {
   DialogTitle,
   DialogContent,
   Fab,
-  Typography
+  Typography,
+  Button,
 } from "@material-ui/core";
 import AndroidIcon from "@material-ui/icons/Android";
 import ChatBubbleTwoToneIcon from "@material-ui/icons/ChatBubbleTwoTone";
 import { connect } from "react-redux";
 //  Import action
 import { sendMessage, userMessage } from "../../actions/useAPICall";
-import image from '../../images/Anz.png'
+import Icon from "@material-ui/core/Icon";
 
 const Chat = ({ chat, userMessage, sendMessage }) => {
   // Handle Users Message
@@ -44,6 +45,13 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
   // })(document, window.kommunicate || {});
   // },[])
 
+  //loading css
+  // <div className="dotwrapper">
+  //  <div className="dot0" />
+  //  <div className="dot1" />
+  //  <div className="dot2" />
+  //</div>
+
   const scrollToBottom = () => {
     endOfMessages?.current?.scrollIntoView(false);
   };
@@ -54,7 +62,14 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
     const code = e.keyCode || e.which;
 
     if (code === 13) {
-      console.log(message);
+      userMessage(message);
+      sendMessage(message);
+      setMessage("");
+    }
+  };
+
+  const handleSend = async () => {
+    if (message !== null && message !== "") {
       userMessage(message);
       sendMessage(message);
       setMessage("");
@@ -71,11 +86,9 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
 
       <div>
         <Dialog open={open} onClose={handleClose}>
-          <div style={{ display: "flex", backgroundColor: '#007dba' }}>
+          <div style={{ display: "flex", backgroundColor: "#007dba" }}>
             <DialogTitle className="chatBG" id="alert-dialog-slide-title">
-            <Typography variant="h5">
-              ChatBot
-            </Typography>
+              <Typography variant="h5">ChatBot</Typography>
             </DialogTitle>
           </div>
           <Divider />
@@ -88,7 +101,10 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
               >
                 <Container>
                   <Grid item xs={12}>
-                    <ListItemText align="right" style={{ color: "rgb(0, 62, 93)" }}>
+                    <ListItemText
+                      align="right"
+                      style={{ color: "rgb(0, 62, 93)" }}
+                    >
                       {!chat && chat?.length === 0
                         ? ""
                         : chat?.map((msg, ind) =>
@@ -96,18 +112,29 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
                               <div align="right" className={msg.type}>
                                 <Avatar src="/broken-image.jpg"></Avatar>
                                 {msg.message}
-                                <h6 className="timeStyle">{new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}</h6>
+                                <h6 className="timeStyle">
+                                  {new Date().toLocaleTimeString("en-US", {
+                                    hour: "numeric",
+                                    hour12: true,
+                                    minute: "numeric",
+                                  })}
+                                </h6>
                               </div>
                             ) : (
-                              <div align="left" className={msg.type}>
+                                <div align="left" className={msg.type}>
                                 <Avatar>
                                   <AndroidIcon />
                                 </Avatar>
                                 {msg.message}
-                                <h6 className="timeStyle">{new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })}</h6>
+                                <h6 className="timeStyle">
+                                  {new Date().toLocaleTimeString("en-US", {
+                                    hour: "numeric",
+                                    hour12: true,
+                                    minute: "numeric",
+                                  })}
+                                </h6>
                               </div>
-                            )
-                          )}
+                            ))}
                       <div ref={endOfMessages}></div>
                     </ListItemText>
                   </Grid>
@@ -115,7 +142,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
               </Grid>
               <Divider />
               <Grid container>
-                <Grid style={{color: 'white'}} item xs={12}>
+                <Grid style={{ color: "white" }} item xs={10}>
                   <TextField
                     id="outlined-basic-email"
                     onKeyPress={handleClick}
@@ -123,6 +150,15 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
                     label="Type Something"
                     value={message}
                     fullWidth
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    className="sendButton"
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSend}
+                    endIcon={<Icon fontSize="large">send</Icon>}
                   />
                 </Grid>
               </Grid>
