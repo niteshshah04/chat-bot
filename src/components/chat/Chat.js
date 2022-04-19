@@ -88,7 +88,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
         <Dialog open={open} onClose={handleClose}>
           <div style={{ display: "flex", backgroundColor: "#007dba" }}>
             <DialogTitle className="chatBG" id="alert-dialog-slide-title">
-              <Typography variant="h5">ChatBot</Typography>
+              <Typography variant="h5">Unika</Typography>
             </DialogTitle>
           </div>
           <Divider />
@@ -121,7 +121,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
                                 </h6>
                               </div>
                             ) : (
-                                <div align="left" className={msg.type}>
+                              <div align="left" className={msg.type}>
                                 <Avatar>
                                   <AndroidIcon />
                                 </Avatar>
@@ -134,7 +134,8 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
                                   })}
                                 </h6>
                               </div>
-                            ))}
+                            )
+                          )}
                       <div ref={endOfMessages}></div>
                     </ListItemText>
                   </Grid>
