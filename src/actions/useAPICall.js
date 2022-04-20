@@ -49,6 +49,23 @@ export const sendMessage = (message) => async (dispatch) => {
       body
     );
     res = response.data[0].text;
+    if (message.toLowerCase().includes("currency")) {
+      await axios
+        .post("https://afq2nfdfdj.us-east-1.awsapprunner.com/model/parse", {
+          text: message,
+        })
+        .then(async (response) => {
+          if (response.data.intent.name === "currency_exchange_rate") {
+            await axios
+              .get(
+                "https://currencydatafeed.com/api/data.php?token=0c7xblkbvebzz8o06rs7&currency=USD/INR"
+              )
+              .then((resp) => {
+                res = resp.data.currency[0].value;
+              });
+          }
+        });
+    }
     dispatch({
       type: MESSAGE_SUCCESS,
       payload: res,
